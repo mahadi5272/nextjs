@@ -1,5 +1,6 @@
 import React from "react";
 import { products } from "@/app/data/Products";
+import Link from "next/link";
 
 const Details = async ({ params }) => {
   const { id } = await params;
@@ -19,7 +20,7 @@ const Details = async ({ params }) => {
 
       {/* Description */}
       <p className="text-gray-700 text-center mt-4 text-lg leading-relaxed">
-        {product.description}
+        {product.fullDescription}
       </p>
 
       {/* Meta Info */}
@@ -38,9 +39,9 @@ const Details = async ({ params }) => {
       </div>
 
       {/* Back Button */}
-      <button className="mt-8 w-full bg-blue-600 text-white py-3 rounded-xl font-semibold text-lg hover:bg-blue-700 transition">
-        Back
-      </button>
+      <Link href={'/AllProduct'} >
+        <button className="mt-8 w-full bg-green-600 text-white py-3 rounded-xl font-semibold text-lg hover:bg-green-900 transition">Back</button>
+      </Link>
     </div>
   );
 };

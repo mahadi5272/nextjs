@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Banner from "./Banner/page";
 import Testimonials from "./Testimonials/page";
 
@@ -29,9 +30,9 @@ export default function Home() {
               doorstep.
             </p>
 
-            <button className="btn bg-orange-600 text-white">
+            <Link href={'/AllProduct'} className="btn bg-orange-600 text-white">
               Explore Collection
-            </button>
+            </Link>
           </div>
         </section>
         {/*4 Relevant Sections  choose based on theme e.g., features, items, testimonials, banner */}
@@ -194,7 +195,7 @@ export default function Home() {
                     className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-300"
                   ></textarea>
 
-                  <button className="w-full btn btn-primary">
+                  <button className="w-full btn bg-black text-white">
                     Send Message
                   </button>
                 </div>
@@ -202,21 +203,21 @@ export default function Home() {
 
               {/* Right Side: Contact Info */}
               <div className="flex flex-col justify-center space-y-10">
-                <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                <div className="bg-gradient-to-r from-blue-100 via-white to-pink-100 p-8 rounded-2xl shadow-lg border border-gray-100">
                   <h4 className="text-xl font-bold text-gray-800 mb-2">
                     📍 Office Location
                   </h4>
                   <p className="text-gray-600">Gulshan, Dhaka, Bangladesh</p>
                 </div>
 
-                <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                <div className="bg-gradient-to-r from-blue-100 via-white to-pink-100 p-8 rounded-2xl shadow-lg border border-gray-100">
                   <h4 className="text-xl font-bold text-gray-800 mb-2">
                     📧 Email
                   </h4>
                   <p className="text-gray-600">support@yourbrand.com</p>
                 </div>
 
-                <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                <div className="bg-gradient-to-r from-blue-100 via-white to-pink-100 p-8 rounded-2xl shadow-lg border border-gray-100">
                   <h4 className="text-xl font-bold text-gray-800 mb-2">
                     📞 Phone
                   </h4>

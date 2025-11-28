@@ -1,7 +1,10 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
+import PrivateRoute from "@/component/PrivateRoute";
+import { ToastContainer } from "react-toastify";
 
 export default function ManageProducts() {
   const [products, setProducts] = useState([]);
@@ -23,48 +26,90 @@ export default function ManageProducts() {
     const confirmDelete = confirm("Are you sure?");
     if (!confirmDelete) return;
 
-    await axios.delete(`http://localhost:5000/product/${id}`);
-    loadProducts();
+    try {
+      await axios.delete(`http://localhost:5000/product/${id}`);
+      loadProducts();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Manage Products</h1>
-      <div className="overflow-x-auto">
-        <table className="w-full border">
-          <thead className="bg-gray-200">
-            <tr>
-              <th className="border p-2">Title</th>
-              <th className="border p-2">Description</th>
-              <th className="border p-2">Number</th>
-              <th className="border p-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((p) => (
-              <tr key={p._id}>
-                <td className="border p-2">{p.title}</td>
-                <td className="border p-2">{p.discription}</td>
-                <td className="border p-2">{p.number}</td>
-                <td className="border p-2 flex gap-2">
-                  <Link
-                    href={`/product/${p._id}`}
-                    className="bg-blue-500 text-white px-3 py-1 rounded"
-                  >
-                    View
-                  </Link>
-                  <button
-                    onClick={() => handleDelete(p._id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded"
-                  >
-                    Delete
-                  </button>
-                </td>
+    <PrivateRoute>
+      <div className="max-w-6xl mx-auto p-6">
+        <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">
+          Manage Products
+        </h1>
+
+        <div className="overflow-x-auto shadow-lg rounded-lg border border-gray-200">
+          <table className="w-full bg-white">
+            <thead className="bg-gray-100 border-b border-gray-300">
+              <tr>
+                <th className="p-4 text-left font-semibold text-gray-700">
+                  Title
+                </th>
+                <th className="p-4 text-left font-semibold text-gray-700">
+                  Short Description
+                </th>
+                <th className="p-4 text-left font-semibold text-gray-700">
+                  Full Description
+                </th>
+                <th className="p-4 text-left font-semibold text-gray-700">
+                  Price
+                </th>
+                <th className="p-4 text-center font-semibold text-gray-700">
+                  Actions
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody className="divide-y divide-gray-200">
+              {products.map((p) => (
+                <tr key={p._id} className="hover:bg-gray-50 transition">
+                  <td className="p-4 text-gray-800 font-medium">{p.title}</td>
+
+                  <td className="p-4 text-gray-600">
+                    {p.description?.length > 40
+                      ? p.description.slice(0, 40) + "..."
+                      : p.description}
+                  </td>
+
+                  <td className="p-4 text-gray-600">
+                    {p.fullDescription?.length > 50
+                      ? p.fullDescription.slice(0, 50) + "..."
+                      : p.fullDescription}
+                  </td>
+
+                  <td className="p-4 font-semibold text-gray-800">
+                    {p.number || p.price} ৳
+                  </td>
+
+                  <td className="p-4">
+                    <div className="flex justify-center gap-3">
+                
+                      <button
+                        onClick={() => handleDelete(p._id)}
+                        className="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-md text-sm transition"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+
+              {products.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="text-center p-6 text-gray-500">
+                    No products found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+          <ToastContainer/>
+        </div>
       </div>
-    </div>
+    </PrivateRoute>
   );
 }

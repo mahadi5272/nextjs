@@ -47,6 +47,7 @@ const AuthProvider = ({ children }) => {
     handlesignOut,
     user,
     loading,
+    setUser
   };
 
   return (
@@ -56,10 +57,4 @@ const AuthProvider = ({ children }) => {
 
 export default AuthProvider;
 
-// name: user?.displayName || 'mahdi',
-// user,
-// createUser: (email, password) => createUserWithEmailAndPassword(auth, email, password),
-// loginUser: (email, password) => signInWithEmailAndPassword(auth, email, password),
-// googleLogin: () => signInWithPopup(auth, googleProvider),
-// signOutUser: () => signOut(auth),
-// updateUser: (updateData) => updateProfile(auth.currentUser, updateData)
+

@@ -25,7 +25,7 @@ const Banner = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href='/AllProduct'>
+          <Link href='/add-product'>
            
             <button className="btn  bg-success text-white">Shop Now</button>
           </Link>

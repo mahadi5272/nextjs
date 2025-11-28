@@ -1,44 +1,74 @@
 "use client";
 
 import { auth } from "@/firebase/firebase.init";
-import useAuth from "@/Hook/useAuth"; // ✅ default import
+import useAuth from "@/Hook/useAuth";
 import Link from "next/link";
 import React from "react";
+import { usePathname } from "next/navigation"; // ⭐ Step-1: import
 
 const Navber = () => {
   const { handlesignOut, user } = useAuth();
+  const pathname = usePathname(); // ⭐ Step-2: get current route
+
   const handleSignOut = (e) => {
     e.preventDefault();
     handlesignOut();
   };
 
+  // ⭐ Step-3: function for active class
+  const activeClass = (path) =>
+    pathname === path
+      ? "text-orange-600 font-bold underline"
+      : "hover:text-orange-500";
+
   const linksBefor = (
     <>
       <li>
-        <Link href="/">Home</Link>
+        <Link href="/" className={activeClass("/")}>
+          Home
+        </Link>
       </li>
+
       <li>
-        <Link href="/AllProduct">All Product</Link>
+        <Link href="/AllProduct" className={activeClass("/AllProduct")}>
+          All Product
+        </Link>
       </li>
+
       <li>
-        <Link href="#contact">Contact</Link>
+        <Link href="#contact" className={activeClass("#contact")}>
+          Contact
+        </Link>
       </li>
+
       <li>
-        <Link href="/SignUp">SignUp</Link>
+        <Link href="/SignUp" className={activeClass("/SignUp")}>
+          SignUp
+        </Link>
       </li>
     </>
   );
+
   const linksAfter = (
     <>
       <li>
-        <Link href="/">Home</Link>
+        <Link href="/" className={activeClass("/")}>
+          Home
+        </Link>
       </li>
+
       <li>
-        <Link href="/AllProduct">All Product</Link>
+        <Link href="/AllProduct" className={activeClass("/AllProduct")}>
+          All Product
+        </Link>
       </li>
+
       <li>
-        <Link href="#contact">Contact</Link>
+        <Link href="#contact" className={activeClass("#contact")}>
+          Contact
+        </Link>
       </li>
+
       <li className="dropdown">
         <label tabIndex={0} className="btn">
           Button
@@ -48,11 +78,26 @@ const Navber = () => {
           className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
         >
           <li>
-            <Link href="/add-product">Add Product</Link>
+            <Link
+              href="/add-product"
+              className={activeClass("/add-product")}
+            >
+              Add Product
+            </Link>
+          </li>
+          <li>
+            <Link href="/myProfile">
+              MyProfile
+            </Link>
           </li>
 
           <li>
-            <Link href="/manage-product">Manage Products</Link>
+            <Link
+              href="/manage-product"
+              className={activeClass("/manage-product")}
+            >
+              Manage Products
+            </Link>
           </li>
         </ul>
       </li>
@@ -79,6 +124,7 @@ const Navber = () => {
               />
             </svg>
           </div>
+
           <ul
             tabIndex="-1"
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
@@ -86,6 +132,7 @@ const Navber = () => {
             {user ? linksAfter : linksBefor}
           </ul>
         </div>
+
         <Link href="/">
           <img
             className="h-13 w-13 rounded-full"

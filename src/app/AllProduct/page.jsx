@@ -23,7 +23,10 @@ export default function ProductsPage() {
               {p.title}
             </h2>
 
-            <p className="text-gray-600 text-center mb-4">{p.description}</p>
+            <p className="text-gray-600 text-center mb-4">
+              {p.shortDescription}
+            </p>
+            <p className="text-gray-600 text-center mb-4">Price:{p.price}</p>
 
             <Link href={`/AllProduct/${p.id}`}>
               <button className="btn bg-green-600 text-white w-full rounded-xl">
