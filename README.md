@@ -1,12 +1,12 @@
-Items App — README
+# Items App — README
 
 A simple full-stack application built using Next.js (App Router), NextAuth.js, and a minimal Express.js backend.
 The project includes public pages, protected pages, authentication, item listing, item details, and product management.
 # Live Link :https://nextprojec.netlify.app/
-# Repository Link :
+# Repository Link : https://github.com/mahadi5272/nextjs.git
 
 🚀 Features
-✅ Landing Page
+# ✅Landing Page
 
 Navbar with logo + 4 routes
 
@@ -18,7 +18,7 @@ Hero section
 
 4 additional sections (features/items/testimonials/banner)
 
-Footer
+# Footer
 
 ✅ Authentication (NextAuth.js)
 
